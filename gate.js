@@ -143,12 +143,6 @@ const Q4_NO_TAUNTS = [
 const Q5_IMAGE_SRC = `${import.meta.env.BASE_URL}images/sorry-flower.jpg`;
 const Q5_IMAGE_SECONDS = 7;
 
-// --- 5) THE SECRET HEART -----------------------------------------
-// Tap the little heart (bottom-right) this many times to reveal it.
-const SECRET_TAPS_NEEDED = 5;
-const SECRET_MESSAGE =
-  "If you're reading this, it means you actually tapped a tiny heart five times just to see what was hiding under it. That's exactly the kind of curious, wonderful thing about you. Happy Birthday, Kusum. 💗";
-
 // --- 6) BACKGROUND MUSIC ------------------------------------------
 // Drop an mp3 at public/audio/bday-song.mp3 (any filename you like,
 // just update the line below to match) and it will autoplay quietly
@@ -216,11 +210,6 @@ const imgPopupImg = $('imgPopupImg');
 
 const gateThanks = $('gateThanks');
 const gateThanksPercent = $('gateThanksPercent');
-
-const secretHeart = $('secretHeart');
-const secretModal = $('secretModal');
-const secretModalText = $('secretModalText');
-const secretModalClose = $('secretModalClose');
 
 const bgMusic = $('bgMusic');
 const muteBtn = $('muteBtn');
@@ -606,21 +595,6 @@ function unlock() {
       .catch(() => { /* no audio file yet, or autoplay blocked — fine either way */ });
   }
 }
-
-/* ---------- secret heart -------------------------------------- */
-let secretTaps = 0;
-secretHeart?.addEventListener('click', () => {
-  secretTaps++;
-  if (secretTaps >= SECRET_TAPS_NEEDED) {
-    secretTaps = 0;
-    secretModalText.textContent = SECRET_MESSAGE;
-    secretModal.hidden = false;
-  }
-});
-secretModalClose?.addEventListener('click', () => { secretModal.hidden = true; });
-secretModal?.addEventListener('click', (e) => {
-  if (e.target === secretModal) secretModal.hidden = true;
-});
 
 /* ---------- mute toggle ----------------------------------------- */
 muteBtn?.addEventListener('click', () => {

@@ -313,17 +313,6 @@
   <!-- Accessible equivalent for reduced-motion + screen readers. -->
   <p class="sr-only">Happy Birthday. Here&rsquo;s to a wonderful year ahead.</p>
 
-  <!-- Secret floating heart — tap it a few times to find a hidden note.
-       Customize SECRET_MESSAGE and SECRET_TAPS_NEEDED in gate.js. -->
-  <button class="secretHeart" id="secretHeart" type="button" aria-label="A little secret">💗</button>
-  <div class="secretModal" id="secretModal" hidden>
-    <div class="secretModal__card">
-      <button class="secretModal__close" id="secretModalClose" type="button" aria-label="Close">✕</button>
-      <p class="secretModal__title">psst&hellip; 🤫</p>
-      <p class="secretModal__text" id="secretModalText"></p>
-    </div>
-  </div>
-
   <!-- Background music. No src is set here on purpose (see gate.js) so a
        build never fails if the file is missing — it just won't play until
        you drop an mp3 at public/audio/bday-song.mp3. -->
