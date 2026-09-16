@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  base: '/happy-birthday-tree/',
+  base: '/happy-birthday-tree-test/',
 })
