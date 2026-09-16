@@ -574,7 +574,9 @@ function showThanks() {
     if (step >= totalSteps) {
       clearInterval(tick);
       gateThanksPercent.textContent = '100%';
-      setTimeout(unlock, 200);
+      setTimeout(() => {
+        window.location.href = `${import.meta.env.BASE_URL}gift2/index.html`;
+      }, 200);
     }
   }, stepMs);
 }
@@ -605,6 +607,20 @@ muteBtn?.addEventListener('click', () => {
 
 /* ---------- go: start on the security phase ---------------------- */
 document.body.style.overflow = 'hidden';
-buildRibbon();
-runBalloonLoop();
-showPhase(gateSecurity);
+if (new URLSearchParams(window.location.search).get('enterFilm') === '1') {
+  // Coming back from the gift2 page's "Wanna see next gift" button —
+  // skip the password/quiz entirely and reveal the real film.
+  gate.style.display = 'none';
+  document.body.style.overflow = '';
+  if (bgMusic && MUSIC_SRC) {
+    bgMusic.src = MUSIC_SRC;
+    bgMusic.volume = 0.55;
+    bgMusic.play()
+      .then(() => { muteBtn.hidden = false; })
+      .catch(() => { /* no audio file yet, or autoplay blocked — fine either way */ });
+  }
+} else {
+  buildRibbon();
+  runBalloonLoop();
+  showPhase(gateSecurity);
+}
