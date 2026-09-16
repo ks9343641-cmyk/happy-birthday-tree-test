@@ -619,6 +619,8 @@ if (new URLSearchParams(window.location.search).get('enterFilm') === '1') {
   // Coming back from the gift2 page's "Wanna see next gift" button —
   // show the exact same loading phase used after the password screen,
   // then reveal the real film instead of the quiz.
+  // Drop the flag from the URL so a refresh restarts from the security page.
+  window.history.replaceState({}, '', window.location.pathname);
   showPhase(gateLoading);
   runLoadingPrank(unlock);
 } else {

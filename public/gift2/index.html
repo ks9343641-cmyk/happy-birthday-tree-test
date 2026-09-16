@@ -388,6 +388,17 @@
 
   <script>
     (function () {
+      // A refresh on this page should restart the whole thing from the
+      // security screen, like any normal website.
+      var navs = performance.getEntriesByType && performance.getEntriesByType('navigation');
+      var isReload = navs && navs.length
+        ? navs[0].type === 'reload'
+        : (performance.navigation && performance.navigation.type === 1);
+      if (isReload) {
+        window.location.replace('../index.html');
+        return;
+      }
+
       var btn = document.getElementById('btn__nextGift');
       if (!btn) return;
       btn.addEventListener('click', function () {
