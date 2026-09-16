@@ -362,12 +362,16 @@ function shatterMirror() {
 
   setTimeout(() => {
     showPhase(gateLoading);
-    runLoadingPrank();
+    runLoadingPrank(() => {
+      showPhase(gatePage2);
+      shakePanel();
+      startQuiz();
+    });
   }, 850);
 }
 
 /* ---------- phase 1: big loader + live percentage --------------- */
-function runLoadingPrank() {
+function runLoadingPrank(onDone) {
   let pct = 0;
   gatePercent.textContent = '0%';
   const tick = setInterval(() => {
@@ -376,11 +380,7 @@ function runLoadingPrank() {
     if (pct >= 100) {
       clearInterval(tick);
       gatePercent.textContent = '100%';
-      setTimeout(() => {
-        showPhase(gatePage2);
-        shakePanel();
-        startQuiz();
-      }, 3000);
+      setTimeout(onDone, 3000);
     }
   }, 140);
 }
@@ -609,16 +609,10 @@ muteBtn?.addEventListener('click', () => {
 document.body.style.overflow = 'hidden';
 if (new URLSearchParams(window.location.search).get('enterFilm') === '1') {
   // Coming back from the gift2 page's "Wanna see next gift" button —
-  // skip the password/quiz entirely and reveal the real film.
-  gate.style.display = 'none';
-  document.body.style.overflow = '';
-  if (bgMusic && MUSIC_SRC) {
-    bgMusic.src = MUSIC_SRC;
-    bgMusic.volume = 0.55;
-    bgMusic.play()
-      .then(() => { muteBtn.hidden = false; })
-      .catch(() => { /* no audio file yet, or autoplay blocked — fine either way */ });
-  }
+  // show the exact same loading phase used after the password screen,
+  // then reveal the real film instead of the quiz.
+  showPhase(gateLoading);
+  runLoadingPrank(unlock);
 } else {
   buildRibbon();
   runBalloonLoop();

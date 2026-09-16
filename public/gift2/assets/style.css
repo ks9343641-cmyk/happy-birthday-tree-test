@@ -883,38 +883,3 @@ h1 {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 #btn__nextGift:hover i{ animation: rotateHeart 1s infinite linear; }
-
-/* ============================================================
-   Loading overlay shown after clicking "Wanna see next gift".
-   Same visual language as the gate loader on the main site.
-   ============================================================ */
-.nextGift__overlay{
-    position: fixed;
-    inset: 0;
-    z-index: 999;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    background: radial-gradient(120% 120% at 50% 20%, #2a1420 0%, #150910 60%, #0c060a 100%);
-}
-.nextGift__spinner{
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    border: 5px solid rgba(247, 231, 220, .25);
-    border-top-color: var(--color-text-pink);
-    animation: nextGiftSpin 0.9s linear infinite;
-}
-@keyframes nextGiftSpin{ to{ transform: rotate(360deg); } }
-.nextGift__loadingMsg{
-    font-family: "Sriracha", cursive;
-    color: #f7e7dc;
-    font-size: 1.1rem;
-}
-.nextGift__percent{
-    font-family: "Titan One", sans-serif;
-    color: var(--color-text-pink);
-    font-size: 1.8rem;
-}

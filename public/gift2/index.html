@@ -386,39 +386,12 @@
     });
   </script>
 
-  <!-- Loading overlay for "Wanna see next gift" -->
-  <div class="nextGift__overlay" id="nextGiftOverlay" hidden>
-    <div class="nextGift__spinner"></div>
-    <p class="nextGift__loadingMsg">loading your gift&hellip;</p>
-    <p class="nextGift__percent" id="nextGiftPercent">0%</p>
-  </div>
-
   <script>
     (function () {
       var btn = document.getElementById('btn__nextGift');
-      var overlay = document.getElementById('nextGiftOverlay');
-      var percentEl = document.getElementById('nextGiftPercent');
       if (!btn) return;
-
       btn.addEventListener('click', function () {
-        overlay.hidden = false;
-        var pct = 0;
-        percentEl.textContent = '0%';
-        var tick = setInterval(function () {
-          pct = Math.min(100, pct + (5 + Math.random() * 9));
-          percentEl.textContent = Math.floor(pct) + '%';
-          if (pct >= 100) {
-            clearInterval(tick);
-            percentEl.textContent = '100%';
-            setTimeout(function () {
-              window.location.href = '../index.html?enterFilm=1';
-            }, 400);
-          }
-        }, 140);
-        // Hard cap: always move on by ~3s even if the tween above finishes early.
-        setTimeout(function () {
-          window.location.href = '../index.html?enterFilm=1';
-        }, 3000);
+        window.location.href = '../index.html?enterFilm=1';
       });
     })();
   </script>
