@@ -373,16 +373,24 @@ function shatterMirror() {
 /* ---------- phase 1: big loader + live percentage --------------- */
 function runLoadingPrank(onDone) {
   let pct = 0;
+  let done = false;
   gatePercent.textContent = '0%';
+  const finish = () => {
+    if (done) return;
+    done = true;
+    clearInterval(tick);
+    clearTimeout(safety);
+    gatePercent.textContent = '100%';
+    setTimeout(onDone, 300);
+  };
   const tick = setInterval(() => {
     pct = Math.min(100, pct + (5 + Math.random() * 9));
     gatePercent.textContent = Math.floor(pct) + '%';
-    if (pct >= 100) {
-      clearInterval(tick);
-      gatePercent.textContent = '100%';
-      setTimeout(onDone, 3000);
-    }
+    if (pct >= 100) finish();
   }, 140);
+  // Safety net: even if the interval above is ever interrupted, never
+  // leave the loader stuck — force it through after 6 seconds max.
+  const safety = setTimeout(finish, 6000);
 }
 
 /* ---------- phase 2: the quiz (Q1–Q3) ---------------------------- */
